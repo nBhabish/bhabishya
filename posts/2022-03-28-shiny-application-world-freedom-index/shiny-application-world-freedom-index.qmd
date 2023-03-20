@@ -1,0 +1,21 @@
+---
+title: "R Shiny Application: World Freedom Index"
+description: "Shiny Dashboard to visualize how World Freedom Index has over time across different regions of the world."
+author: 
+  - name: Bhabishya Neupane
+image: featured.png
+date: "2022-03-28"
+categories: [R Shiny, Tidy Tuesday, leaflet, reactable, reactablefmtr, crosstalk]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+# Link 
+
+Link: [World Freedom Index Shiny Dashboard](https://bhabishya-neupane.shinyapps.io/WorldFreedomIndex/)
+
+

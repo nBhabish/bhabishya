@@ -1,0 +1,47 @@
+---
+title: "R Shiny Application: Natural Gas Demand Forecast"
+description: "Forecasting monthly natural gas demand in the United States until 2023-01-01 using data from USgas package in R put together by Rami Krispin, Data Science and Engineering Manager @ Apple"
+author: 
+  -name: Bhabishya Neupane
+date: "2022-03-28"
+image: featured.png
+categories: [USgas, R Shiny, Time Series Forecasting]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(vembedr)
+```
+
+# Dashboard Link
+
+Link to the Shiny Application: [Natural Gas Demand Forecast](https://bhabishya-neupane.shinyapps.io/US-Natural-Gas-Demand-Forecast-Dashboard/)
+
+```{r}
+embed_url("https://www.youtube.com/watch?v=B-AxYLAHeVU")
+```
+
+# Key Takeaways
+
+- Out of all of the models, `auto_arima()` gave us the best forecasting accuracy. 
+- TBATS was the worst performing model. 
+- Post-forecast diagnostics inform that most of the information was extracted by the fitted models. 
+
+# Improvisation
+
+- ML models like XGBoost, or a combination of XGBoost and PROPHET could potentially give us a better accuracy. XGBoost by itself is great at picking up patterns, but when combined with PROPHET (given the seasonality parameter is turned off for PROPHET), it would be ideal at picking up multiple seasonalities. 
+
+- Above recommendation is a potential method and by no means a solution. The best way to find out would be to fit the model and observe the accuracy metrics. 
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+{
+  "hash": "47a6e84b19c55794901a265060da43a5",
+  "result": {
+    "markdown": "---\ntitle: \"R Shiny Application: World Freedom Index\"\ndescription: \"Shiny Dashboard to visualize how World Freedom Index has over time across different regions of the world.\"\nauthor: \n  - name: Bhabishya Neupane\nimage: featured.png\ndate: \"2022-03-28\"\ncategories: [R Shiny, Tidy Tuesday, leaflet, reactable, reactablefmtr, crosstalk]\n---\n\n\n\n\n# Link \n\nLink: [World Freedom Index Shiny Dashboard](https://bhabishya-neupane.shinyapps.io/WorldFreedomIndex/)\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}

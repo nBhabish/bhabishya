@@ -1,0 +1,38 @@
+---
+title: "R Shiny: Small Business Innovation Research"
+description: "R Shiny Dashboard to visualize the distribution of federal funding across different states and departments from 2010 to 2019 for SBIR."
+author: 
+  - name: Bhabishya Neupane
+image: featured.png
+date: "2022-03-30"
+categories: [leaflet, R Shiny, SBIR]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(vembedr)
+```
+
+# Dashboard Link
+
+Link to the Shiny Application: [Small Business Innovation Research Dashboard](https://bhabishya-neupane.shinyapps.io/SBIR-Dashboard/)
+
+
+```{r}
+embed_url("https://www.youtube.com/watch?v=Ct_LOqQmpHY")
+```
+
+
+# About the Project
+
+This shiny dashboard was put together in a very short notice. I worked on this project two weeks before my graduation and there were a lot of changes that were made on this dashboard. 
+
+### About SBIR
+The Small Business Innovation Research (SBIR) programs is a competitive program that encourages small businesses to engage in Federal Research/Research and Development (R/R&D) with the potential for commercialization. Through a competitive awards-based program, SBIR awards enable small businesses to explore their technological potential and provide the incentive to profit from its commercialization.
+
+### Resources that helped me
+
+1. [Interactive chloropleth map with leaflet and shiny](https://stackoverflow.com/questions/36107371/interactive-choropleth-map-with-leaflet-and-shiny)
+
+
