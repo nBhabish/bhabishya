@@ -4,7 +4,7 @@ description: I will be exploring infer package for statistical inference.
 author: 
   - name: Bhabishya Neupane
 date: "2022-03-26"
-image: featured.jpeg
+image: featured.jpg
 categories: [Tidy Tuesday, infer]
 ---
 
