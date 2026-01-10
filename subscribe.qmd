@@ -1,0 +1,8 @@
+---
+title: "Subscribe"
+---
+
+You can subscribe to updates via **RSS** or **email**.
+
+- [RSS Feed](/index.xml)
+- Email updates coming soon.

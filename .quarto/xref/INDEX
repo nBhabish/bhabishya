@@ -1,0 +1,50 @@
+{
+  "posts/first_post.qmd": {
+    "first_post.html": "985ddcff"
+  },
+  "posts/index.qmd": {
+    "index.html": "095a146a"
+  },
+  "subscribe.qmd": {
+    "subscribe.html": "6c1185cb"
+  },
+  "index.qmd": {
+    "index.html": "32a31502"
+  },
+  "about.qmd": {
+    "about.html": "3ae903c7"
+  },
+  "posts/second_post.qmd": {
+    "second_post.html": "43430792"
+  },
+  "posts/vllm-and-lmcache.qmd": {
+    "vllm-and-lmcache.html": "af4893c1"
+  },
+  "SETUP-COMMENTS.md": {
+    "SETUP-COMMENTS.html": "95401f9a"
+  },
+  "posts/pagedattention.qmd": {
+    "pagedattention.html": "fa18c60d"
+  },
+  "posts/2022-03-28-shiny-application-world-freedom-index/shiny-application-world-freedom-index.qmd": {
+    "shiny-application-world-freedom-index.html": "83c32176"
+  },
+  "posts/2022-03-28-tidy-tuesday-chocolate-ratings/tidy-tuesday-chocolate-ratings.qmd": {
+    "tidy-tuesday-chocolate-ratings.html": "98df23e3"
+  },
+  "posts/2022-03-30-r-shiny-small-business-innovation-research/r-shiny-small-business-innovation-research.qmd": {
+    "r-shiny-small-business-innovation-research.html": "1e04bdad"
+  },
+  "posts/2022-03-28-dairyplantdata-r-data-package/dairyplantdata-r-data-package.qmd": {
+    "dairyplantdata-r-data-package.html": "811ad126"
+  },
+  "posts/2022-03-28-tidy-tuesday-art-collections/tidy-tuesday-art-collections.qmd": {
+    "tidy-tuesday-art-collections.html": "0cdd4d80"
+  },
+  "posts/2022-03-28-shiny-application-united-states-natural-gas-demand-forecast/shiny-application-united-states-natural-gas-demand-forecast.qmd": {
+    "shiny-application-united-states-natural-gas-demand-forecast.html": "bf270310"
+  },
+  "posts/2022-03-28-tidy-tuesday-world-freedom-index/tidy-tuesday-world-freedom-index.qmd": {
+    "tidy-tuesday-world-freedom-index.html": "703337bd"
+  }
+}

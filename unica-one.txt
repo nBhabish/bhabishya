@@ -1,0 +1,206 @@
+/*-- scss:rules --*/
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
+
+body {
+  font-family: 'Merriweather', serif;
+  background: url('https://images.ctfassets.net/kftzwdyauwt9/7CqekFe9SNFLc9GaHmqJdQ/7da0fef5bd8527cc28fab9411d03f0be/oai_Fidji_Simo_Wallpaper.png?w=3840&q=90&fm=webp') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  max-width: 700px; /* Keep narrow for home page and individual posts */
+  margin: 3rem auto;
+  line-height: 1.75;
+  text-align: left !important;
+  min-height: 100vh; /* Ensure background covers full viewport */
+}
+
+/* Special wider layout for blog listing pages */
+body.quarto-listing-page {
+  max-width: 900px !important; /* Much wider for blog listing */
+  margin: 3rem auto;
+  padding: 0 2rem; /* Add horizontal padding */
+  background: url('https://images.ctfassets.net/kftzwdyauwt9/7CqekFe9SNFLc9GaHmqJdQ/7da0fef5bd8527cc28fab9411d03f0be/oai_Fidji_Simo_Wallpaper.png?w=3840&q=90&fm=webp') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+/* Override morph theme centering */
+.quarto-container,
+.quarto-container > *,
+main,
+main > *,
+article,
+section {
+  text-align: left !important;
+}
+
+/* Specifically target content areas */
+.content,
+.page-content,
+#quarto-content,
+#quarto-content > * {
+  text-align: left !important;
+}
+
+/* Style for the main title "Bhabishya Neupane" */
+h1.title {
+  font-family: 'Unica One', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+/* Style for "Building with Data & Intelligence" heading */
+#building-with-data-intelligence {
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Unica One', sans-serif;
+  font-weight: 400;
+  margin-top: 2rem;
+}
+
+.navbar {
+  padding-top: 2rem;
+  margin-bottom: 3rem;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.navbar a {
+  color: white;
+  margin-right: 1rem;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  display: none;
+}
+
+ul, p {
+  margin-bottom: 1.5rem;
+}
+
+/* IMPROVED BLOG POST LISTING STYLES */
+
+/* Make listing section much more spacious */
+.listing {
+  max-width: 100% !important; /* Use full available width */
+  margin: 0 !important; /* Remove extra margins */
+  padding: 0 !important; /* Remove container padding since body has it */
+}
+
+/* Give each blog post much more breathing room */
+.listing .quarto-post {
+  display: block !important;
+  padding: 3rem 0 !important; /* Doubled from 1.5rem to 3rem */
+  margin-bottom: 2rem !important; /* Add margin between posts */
+  border-bottom: 1px solid #eee;
+  text-align: left !important;
+}
+
+.listing .quarto-post:last-child {
+  border-bottom: none;
+  padding-bottom: 1rem !important; /* Less padding on last post */
+}
+
+/* Make post titles more prominent and spacious */
+.listing .quarto-post .title {
+  font-family: 'Unica One', sans-serif;
+  font-size: 1.6rem !important; /* Increased from 1.4rem */
+  line-height: 1.4 !important;
+  margin-bottom: 1rem !important; /* Increased from 0.5rem */
+  margin-top: 0 !important;
+  text-align: left !important;
+  font-weight: 400 !important;
+}
+
+/* Style the post dates with more space */
+.listing .quarto-post .metadata {
+  display: block !important; /* Put date on its own line for more space */
+  margin-bottom: 1rem !important; /* Add space below date */
+  margin-right: 0 !important;
+  color: #666 !important;
+  font-size: 0.9rem !important;
+  text-align: left !important;
+}
+
+/* Style post descriptions with generous spacing */
+.listing .quarto-post .description {
+  color: #555 !important;
+  margin-top: 1rem !important; /* Increased from 0.5rem */
+  line-height: 1.6 !important; /* Better readability */
+  font-size: 1rem !important; /* Slightly larger for readability */
+  text-align: left !important;
+}
+
+/* Make the main "Posts" title more prominent */
+.listing h1,
+.listing .listing-title {
+  font-family: 'Unica One', sans-serif;
+  text-align: left !important;
+  font-size: 2.2rem !important; /* Increased from 2rem */
+  margin-bottom: 3rem !important; /* Increased from 2rem */
+  margin-top: 2rem !important;
+}
+
+/* Remove any thumbnail/image containers */
+.listing .quarto-post .thumbnail,
+.listing .quarto-post .listing-image {
+  display: none !important;
+}
+
+/* Add subtle hover effect for better interactivity */
+.listing .quarto-post:hover {
+  background-color: #fafafa;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* Style About Me page content */
+.quarto-title-block .quarto-title h1 {
+  text-align: left !important;
+}
+
+.quarto-title-block {
+  text-align: left !important;
+}
+
+/* Make all page content left-aligned by default */
+main {
+  text-align: left !important;
+}
+
+/* Target the main content area more specifically */
+.quarto-container {
+  text-align: left !important;
+}
+
+/* Override any centering on the page content */
+#quarto-content {
+  text-align: left !important;
+}
+
+/* Force left alignment for all content within main */
+main * {
+  text-align: left !important;
+}

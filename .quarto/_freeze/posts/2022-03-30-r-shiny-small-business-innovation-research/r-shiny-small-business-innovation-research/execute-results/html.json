@@ -1,0 +1,19 @@
+{
+  "hash": "ab6da1eab784b0c0e0edd731eb992d5a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Mapping Federal SBIR Funding Across States and Departments\"\ndescription: \"R Shiny Dashboard to visualize the distribution of federal funding across different states and departments from 2010 to 2019 for SBIR.\"\nauthor: \n  - name: Bhabishya Neupane\nimage: featured.png\ndate: \"2022-03-30\"\ncategories: [leaflet, R Shiny, SBIR]\n---\n\n\n\n\n# Dashboard Link\n\nLink to the Shiny Application: [Small Business Innovation Research Dashboard](https://bhabishya-neupane.shinyapps.io/SBIR-Dashboard/)\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n\n```{=html}\n<div class=\"vembedr\">\n<div>\n<iframe src=\"https://www.youtube.com/embed/Ct_LOqQmpHY\" width=\"533\" height=\"300\" frameborder=\"0\" allowfullscreen=\"\" data-external=\"1\"></iframe>\n</div>\n</div>\n```\n\n:::\n:::\n\n\n\n# About the Project\n\nThis shiny dashboard was put together in a very short notice. I worked on this project two weeks before my graduation and there were a lot of changes that were made on this dashboard. \n\n### About SBIR\nThe Small Business Innovation Research (SBIR) programs is a competitive program that encourages small businesses to engage in Federal Research/Research and Development (R/R&D) with the potential for commercialization. Through a competitive awards-based program, SBIR awards enable small businesses to explore their technological potential and provide the incentive to profit from its commercialization.\n\n### Resources that helped me\n\n1. [Interactive chloropleth map with leaflet and shiny](https://stackoverflow.com/questions/36107371/interactive-choropleth-map-with-leaflet-and-shiny)\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/vembedr-0.1.5/css/vembedr.css\" rel=\"stylesheet\" />\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

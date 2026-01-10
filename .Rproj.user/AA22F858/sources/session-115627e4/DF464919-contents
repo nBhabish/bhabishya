@@ -1,0 +1,31 @@
+---
+title: "About Me"
+format:
+  html:
+    body-class: about-page
+---
+
+## Currently
+
+Data Engineer at Medical College of Wisconsin, where I build data pipelines and infrastructure to support healthcare analytics and research.
+
+## Experience
+
+Ecolab \[**Analyst**\]
+
+-   Developed data-driven solutions for operational efficiency and business intelligence.
+
+Bureau of Business Research, UNL-COB \[**Researcher\]**
+
+-   Conducted economic research and statistical analysis.
+
+## Education
+
+**B.A. Economics & Mathematics** University of Nebraska-Lincoln
+
+## Get in Touch
+
+Feel free to connect with me:
+
+-   Email: bhabishyaneupane45\@example.com
+-   GitHub: [github.com/nBhabish](https://github.com/nBhabish)

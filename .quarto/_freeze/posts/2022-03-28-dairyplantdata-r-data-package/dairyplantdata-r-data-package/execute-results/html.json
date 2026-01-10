@@ -1,0 +1,15 @@
+{
+  "hash": "3d0f4dcdeb091b657a527b908fdd2b44",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Building an R Data Package for Dairy Processing Research\"\ndescription: \"This was built to faciliate research for senior economists at the University of Nebraska - Lincoln.\"\nauthor: Bhabishya Neupane\ndate: \"2022-03-28\"\nimage: hex.png\ncategories: [usethis, r package, pkgdown]\n---\n\n\n\n\n# About the Project\n\nThe purpose behind building `{dairyplantdata}` data package was to facilitate senior economists at the University of Nebraska - Lincoln to investigate the [Economic Impact of Dairy Processing Expansion in Nebraska](https://farm.unl.edu/documents/dairy/economic-impact-dairy-processing-expansion-may-3-2021.pdf). It was also built to remove the hassle of searching datasets in some corner of our computer. \n\nI personally did not want to go through multiple folders searching for a dataset, so I was more motivated to build this into a data package. \n\n- Learn More: [Economic Impact of Dairy Processing Expansion in Nebraska](https://farm.unl.edu/documents/dairy/economic-impact-dairy-processing-expansion-may-3-2021.pdf)\n\n- You can access the usage information here: [dairyplantdata](https://nbhabish.github.io/dairyplantdata/reference/dairy_plant_data.html)\n\n![](pkgdown.png)\n\n# How to use?\n\n- Run the following piece of code:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# install.package(\"remotes\")   #In case you have not installed it.\nremotes::install_github(\"nBhabish/dairyplantdata\")\n\ndairyplantdata::dairy_plant_data\n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

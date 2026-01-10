@@ -1,0 +1,38 @@
+project:
+  type: website
+
+website:
+  title: "Bhabishya Neupane"
+  description: "Data engineer crafting solutions with Python, SQL, and R. Writing about AI engineering, LLMs, and transforming data into real-world impact."
+  site-url: "https://yourdomain.com"  # Replace with your actual domain
+  favicon: favicon.svg
+  navbar:
+    background: white
+    foreground: black
+    left:
+      - text: "Blog"
+        href: posts/index.qmd
+      - text: "About Me"
+        href: about.qmd
+  page-footer:
+    center: "© 2025 Bhabishya Neupane · BN · <a href='/posts/index.xml'>rss</a>"
+  search: false
+  google-analytics: "G-XXXXXXXXXX"  # Add your Google Analytics ID
+  open-graph: true
+  twitter-card: true
+
+format:
+  html:
+    theme:
+      - morph
+      - styles.css    # our overrides
+    fontsize: 0.8rem
+    grid:
+      sidebar-width: 300px
+      body-width: 900px
+      margin-width: 300px
+      gutter-width: 1.5rem
+    include-in-header:
+      - text: |
+          <script src="/dark-mode.js"></script>
+

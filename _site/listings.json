@@ -1,0 +1,15 @@
+[
+  {
+    "listing": "/posts/index.html",
+    "items": [
+      "/posts/vllm-and-lmcache.html",
+      "/posts/2022-03-30-r-shiny-small-business-innovation-research/r-shiny-small-business-innovation-research.html",
+      "/posts/2022-03-28-shiny-application-world-freedom-index/shiny-application-world-freedom-index.html",
+      "/posts/2022-03-28-dairyplantdata-r-data-package/dairyplantdata-r-data-package.html",
+      "/posts/2022-03-28-shiny-application-united-states-natural-gas-demand-forecast/shiny-application-united-states-natural-gas-demand-forecast.html",
+      "/posts/2022-03-28-tidy-tuesday-world-freedom-index/tidy-tuesday-world-freedom-index.html",
+      "/posts/2022-03-28-tidy-tuesday-chocolate-ratings/tidy-tuesday-chocolate-ratings.html",
+      "/posts/2022-03-28-tidy-tuesday-art-collections/tidy-tuesday-art-collections.html"
+    ]
+  }
+]

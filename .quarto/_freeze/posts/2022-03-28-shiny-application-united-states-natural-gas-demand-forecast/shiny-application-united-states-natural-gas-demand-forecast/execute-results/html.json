@@ -1,0 +1,19 @@
+{
+  "hash": "7a452951a6e05dd50acb5f1026822913",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Time Series Forecasting: US Natural Gas Demand with ARIMA and TBATS\"\ndescription: \"Forecasting monthly natural gas demand in the United States until 2023-01-01 using data from USgas package in R put together by Rami Krispin, Data Science and Engineering Manager @ Apple\"\nauthor: \n  -name: Bhabishya Neupane\ndate: \"2022-03-28\"\nimage: featured.png\ncategories: [USgas, R Shiny, Time Series Forecasting]\n---\n\n\n\n\n# Dashboard Link\n\nLink to the Shiny Application: [Natural Gas Demand Forecast](https://bhabishya-neupane.shinyapps.io/US-Natural-Gas-Demand-Forecast-Dashboard/)\n\n\n::: {.cell}\n::: {.cell-output-display}\n\n```{=html}\n<div class=\"vembedr\">\n<div>\n<iframe src=\"https://www.youtube.com/embed/B-AxYLAHeVU\" width=\"533\" height=\"300\" frameborder=\"0\" allowfullscreen=\"\" data-external=\"1\"></iframe>\n</div>\n</div>\n```\n\n:::\n:::\n\n\n# Key Takeaways\n\n- Out of all of the models, `auto_arima()` gave us the best forecasting accuracy. \n- TBATS was the worst performing model. \n- Post-forecast diagnostics inform that most of the information was extracted by the fitted models. \n\n# Improvisation\n\n- ML models like XGBoost, or a combination of XGBoost and PROPHET could potentially give us a better accuracy. XGBoost by itself is great at picking up patterns, but when combined with PROPHET (given the seasonality parameter is turned off for PROPHET), it would be ideal at picking up multiple seasonalities. \n\n- Above recommendation is a potential method and by no means a solution. The best way to find out would be to fit the model and observe the accuracy metrics. \n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/vembedr-0.1.5/css/vembedr.css\" rel=\"stylesheet\" />\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,19 @@
+---
+title: "Posts"
+format:
+  html:
+    body-class: blog-page
+listing:
+  contents: .
+  sort: "date desc"
+  type: table
+  table-striped: false
+  table-hover: true
+  fields: [date, title, author, reading-time]
+  categories: false
+  sort-ui: false
+  filter-ui: false
+---
+
+---
+

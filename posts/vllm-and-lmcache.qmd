@@ -1,0 +1,259 @@
+---
+title: "vLLM and LMCache: Notes on Optimizing LLM Inference"
+date: 2026-01-03
+author: Bhabishya Neupane
+categories: [vLLM, LMCache, LLM Inference, KV Cache]
+description: "My notes on using vLLM and LMCache to optimize memory usage and throughput when serving LLMs on A100 80GB GPUs"
+format:
+  html:
+    page-layout: full
+---
+
+## Why I'm Writing This
+
+Every time I deploy a new LLM or optimize an existing one, I forget the details. How much memory does the KV cache actually use? What's the formula again? How do I profile this? These are my notes so I can stop googling the same things over and over.
+
+## vLLM: What It Does
+
+vLLM solves the memory management problem when serving LLMs. The big innovation is PagedAttention - think of it like this: instead of requiring continuous memory blocks (like needing an entire empty shelf for a book), it lets you split things across wherever there's space. This sounds simple but it's huge - I typically see 2-3x better throughput just from this.
+
+The other major feature is continuous batching. Instead of waiting for an entire batch to finish, it dynamically fills slots as requests complete. Like a restaurant that seats new customers as tables open, not after everyone leaves.
+
+Bottom line: same hardware, way more requests per second.
+
+## The KV Cache Math I Keep Forgetting
+
+Here's the part I always need to look up. For Llama 3.1 8B:
+
+**Per token, you need:**
+- 32 layers
+- 32 attention heads (grouped query attention with 8 KV heads)
+- 128 dimensions per head
+- × 2 (key and value)
+- × 2 bytes (FP16)
+
+For the KV cache calculation with GQA: 2 × 32 × 8 × 128 × 2 = **131,072 bytes = 128 KB per token**
+
+Wait, that's way less than I expected. This is because Llama 3.1 uses Grouped Query Attention (GQA) with only 8 KV heads instead of 32. This is one of the improvements over Llama 2.
+
+**For a 4096 token context:** 128 KB × 4096 = **~512 MB**
+
+So for Llama 3.1 8B on my A100 80GB:
+- Model weights: ~16 GB (FP16)
+- KV cache for 4096 tokens: ~512 MB per request
+- Remaining: ~64 GB for batching more requests
+
+Quick rule: plan for **1-1.5 GB per concurrent user** (accounts for varying generation lengths and overhead).
+
+**How many users can I serve?**
+- 80 GB total
+- 16 GB for model
+- 64 GB remaining
+- At 1.2 GB per user: ~53 concurrent users theoretically
+- In practice, I target 35-40 concurrent requests
+
+The GQA in Llama 3.1 makes a huge difference - way more efficient than Llama 2.
+
+## LMCache: Why I Actually Use It
+
+LMCache lets you cache KV pairs across requests. This matters because most of my applications have repeated prefixes:
+
+**My main use case: Extracting structured output from clinical notes**
+- System prompt with extraction instructions: ~500 tokens
+- Few-shot examples: ~400 tokens
+- Total repeated prefix: ~900 tokens
+- Without LMCache: recompute 900 tokens for every clinical note
+- With LMCache: compute once, reuse for all notes
+
+For 900 tokens on Llama 3.1 8B: 128 KB × 900 = **~115 MB saved per request**
+
+The clinical notes themselves vary wildly in length. Here's the KV cache breakdown I need to plan for:
+
+**KV Cache by Context Length (Llama 3.1 8B):**
+- **4,096 tokens**: 128 KB × 4096 = **~512 MB**
+- **16,384 tokens** (~16K): 128 KB × 16384 = **~2 GB**
+- **32,768 tokens** (~32K): 128 KB × 32768 = **~4 GB**
+- **65,536 tokens** (~64K): 128 KB × 65536 = **~8 GB**
+
+This matters for capacity planning. If I'm processing clinical notes that average 8K tokens but some go to 32K:
+- Average case: 512 MB + overhead = ~1 GB per user
+- Worst case: 4 GB + overhead = ~5 GB per user
+
+I need to plan for the worst case, so on my A100 80GB:
+- Model: 16 GB
+- Available for KV cache: 64 GB
+- Worst case (32K context): ~12-13 concurrent requests max
+- Average case (8K context): ~40 concurrent requests
+
+**Other places I use LMCache:**
+- RAG pipelines (same document context repeatedly)
+- Chat apps (long system prompts)
+- Any workflow with fixed instruction prefixes
+
+The latency improvement is noticeable - first request is normal, subsequent requests are significantly faster because you skip computing those 900 tokens of instructions and examples.
+
+## How I Actually Profile This
+
+### Quick Check: nvidia-smi
+
+```bash
+watch -n 1 nvidia-smi
+```
+
+Simple, gives me a rough idea. If I want more detail:
+
+```bash
+nvidia-smi --query-gpu=memory.used,memory.free --format=csv -l 1
+```
+
+### My Standard Profiling Script
+
+I keep this snippet handy:
+
+```python
+import torch
+from vllm import LLM, SamplingParams
+
+# Reset memory tracking
+torch.cuda.reset_peak_memory_stats()
+
+# Load model
+llm = LLM("meta-llama/Llama-3.1-8B-Instruct",
+          gpu_memory_utilization=0.9,
+          max_model_len=8192)  # Llama 3.1 supports up to 128K but using 8K here
+
+# Test prompts
+prompts = [
+    "Explain how neural networks learn.",
+    "What is the difference between supervised and unsupervised learning?",
+    "How does backpropagation work?",
+    "What are transformers in deep learning?"
+]
+
+sampling_params = SamplingParams(temperature=0.8, max_tokens=256)
+outputs = llm.generate(prompts, sampling_params)
+
+# Memory breakdown
+total = torch.cuda.get_device_properties(0).total_memory / 1e9
+peak = torch.cuda.max_memory_allocated() / 1e9
+model_weights = 16  # Llama 3.1 8B in FP16
+
+print(f"\nA100 80GB Memory Usage:")
+print(f"Total: {total:.1f} GB")
+print(f"Peak Used: {peak:.1f} GB")
+print(f"Model: ~{model_weights:.1f} GB")
+print(f"KV Cache: ~{peak - model_weights:.1f} GB")
+print(f"Available: {total - peak:.1f} GB\n")
+```
+
+**Typical output I see:**
+- Total: 80 GB
+- Model: 16 GB
+- KV cache for 4 requests: 2-3 GB (much less than Llama 2 thanks to GQA)
+- Remaining: ~60 GB
+
+### Using vLLM's Built-in Stats
+
+```python
+# After running requests
+stats = llm.get_stats()
+print(f"KV Cache: {stats.get('gpu_cache_usage_perc', 0):.1f}%")
+print(f"Cached Tokens: {stats.get('num_cached_tokens', 0)}")
+```
+
+This is helpful to see how much of the allocated KV cache is actually being used.
+
+## My Deployment Notes for A100 80GB
+
+**What works well:**
+- Llama 3.1 8B: Easy, can batch 35-40 users comfortably
+- Llama 3.1 70B: Need multi-GPU with tensor parallelism (2-3 A100s)
+- Mistral 7B v0.3: Similar to Llama 3.1 8B, 30-35 users
+- Mixtral 8x7B: ~10-12 concurrent users
+
+**Memory formula I use:**
+```
+Total needed = Model weights + (1.2 GB × concurrent users) + 5 GB buffer
+```
+
+**For Llama 3.1 8B:**
+```
+16 GB + (1.2 × 40) + 5 = ~69 GB
+```
+So ~40 concurrent users is my target for 8K context. For shorter contexts (2K), I can push to 50+.
+
+**For Llama 3.1 70B (single GPU won't fit, just for reference):**
+```
+~140 GB in FP16 - needs 2x A100 80GB minimum
+```
+
+## Performance Numbers I've Seen
+
+**Before vLLM (using HuggingFace pipeline):**
+- ~8 requests/second
+- Could batch 4-5 requests max
+- Lots of wasted memory
+
+**After vLLM with Llama 3.1 8B:**
+- ~40 requests/second
+- Batch 35-40 requests
+- Much better memory utilization (GQA helps a lot)
+
+**After adding LMCache (for RAG app):**
+- First request: same latency
+- Subsequent requests: ~45% faster
+- Way better throughput because I'm skipping 500 tokens of repeated context
+
+The jump from Llama 2 to Llama 3.1 was significant - not just better quality but also better memory efficiency.
+
+## Things I Learned the Hard Way
+
+1. **Context length matters more than batch size for memory**
+   - One user with 8192 tokens uses way more memory than four users with 2048 tokens each
+   - Always ask: what's my average context length?
+   - Llama 3.1 supports up to 128K context but I rarely use more than 8K
+
+2. **Leave headroom**
+   - Don't use 100% of memory
+   - Spikes happen during generation
+   - I target 90-95% max
+
+3. **LMCache requires shared prefixes**
+   - If every request is unique, LMCache doesn't help
+   - Check your use case first
+
+4. **Monitor in production**
+   - Memory usage varies with load
+   - What works in testing might not scale
+   - I keep nvidia-smi running in a tmux window
+
+5. **GQA is a game changer**
+   - Llama 3.1's grouped query attention uses way less KV cache
+   - This means more concurrent users or longer contexts
+   - Always prefer models with GQA when possible
+
+## Quick Reference: Model Sizes (FP16)
+
+For when I need to quickly estimate:
+- Llama 3.1 8B: ~16 GB
+- Llama 3.1 70B: ~140 GB (multi-GPU)
+- Mistral 7B v0.3: ~14 GB
+- Mixtral 8x7B: ~90 GB
+- Qwen 2.5 7B: ~14 GB
+
+## When I Come Back to This
+
+Key things to remember:
+- Llama 3.1 8B uses GQA: only 128 KB per token (vs 512 KB for Llama 2)
+- Plan 1-1.5 GB per concurrent user for Llama 3.1 8B
+- A100 80GB can handle ~35-40 users for 8B models with 8K context
+- Use LMCache for repeated prefixes
+- Always leave 5-10 GB buffer
+
+**Why Llama 3.1 over Llama 2:**
+- Better quality
+- 4x less KV cache memory (GQA with 8 heads vs 32)
+- Supports up to 128K context (though I usually stick to 8K)
+- Better instruction following
+
+vLLM and LMCache turned LLM deployment from painful to manageable. The performance difference is too significant to ignore.

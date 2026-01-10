@@ -1,0 +1,184 @@
+---
+title: ""
+page-layout: full
+---
+
+<style>
+/* Minimalistic background pattern for landing page */
+body {
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(72, 87, 133, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(230, 57, 70, 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 50% 20%, rgba(72, 87, 133, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme="dark"] body::before {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(107, 155, 209, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(255, 107, 122, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 50% 20%, rgba(107, 155, 209, 0.06) 0%, transparent 50%);
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-family: 'Patua One', cursive;
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: rgb(72, 87, 133);
+  font-style: normal;
+}
+
+.hero-subtitle {
+  font-family: 'Patua One', cursive;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-decoration: none;
+  font-family: 'Patua One', cursive;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--text-secondary);
+  color: var(--bg-color);
+  text-decoration: none;
+}
+
+.cta-button.secondary {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+}
+
+.cta-button.secondary:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-decoration: none;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.skill-item {
+  animation: fadeIn 0.8s ease-in;
+  animation-fill-mode: both;
+}
+
+.skill-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.skill-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skill-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.skill-item {
+  text-align: left;
+}
+
+.skill-item h3 {
+  font-family: 'Patua One', cursive;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-style: normal;
+}
+
+.skill-item p {
+  font-family: 'Patua One', cursive;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-style: normal;
+}
+</style>
+
+::: {.hero-section}
+## What I Write About {.hero-title}
+
+::: {.hero-subtitle}
+Data engineer exploring statistical inference, interactive visualizations, and LLM optimization. My posts cover practical applications from bootstrap resampling to deploying models on GPUs.
+:::
+
+::: {.skills-grid}
+::: {.skill-item}
+### Statistical Analysis
+Bootstrap inference, exploratory data analysis, and hypothesis testing with R
+:::
+
+::: {.skill-item}
+### LLM Infrastructure
+vLLM optimization, KV cache management, and serving models on A100 GPUs
+:::
+
+::: {.skill-item}
+### Interactive Dashboards
+Building Shiny applications for data exploration and time series forecasting
+:::
+:::
+
+::: {.cta-buttons}
+[Read My Posts](posts/index.qmd){.cta-button}
+[Read About Me](about.qmd){.cta-button .secondary}
+:::
+:::

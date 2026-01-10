@@ -1,0 +1,15 @@
+{
+  "hash": "7ba535101bc8dac3f07eea96da93c903",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Interactive Dashboard: Visualizing World Freedom Index Over Time\"\ndescription: \"Shiny Dashboard to visualize how World Freedom Index has over time across different regions of the world.\"\nauthor: \n  - name: Bhabishya Neupane\nimage: featured.png\ndate: \"2022-03-28\"\ncategories: [R Shiny, Tidy Tuesday, leaflet, reactable, reactablefmtr, crosstalk]\n---\n\n\n\n\n# Link \n\nLink: [World Freedom Index Shiny Dashboard](https://bhabishya-neupane.shinyapps.io/WorldFreedomIndex/)\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
