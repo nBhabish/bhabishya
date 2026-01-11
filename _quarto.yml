@@ -1,5 +1,10 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "!README.md"
+    - "!SETUP-COMMENTS.md"
+    - "!ember.scss"
 
 website:
   title: "Bhabishya Neupane"
