@@ -111,7 +111,7 @@ gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true});
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -145,9 +145,9 @@ gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-right">
+    <div class="quarto-title column-page">
       <h1 class="title">vLLM and LMCache: Notes on Optimizing LLM Inference</h1>
                   <div>
         <div class="description">
@@ -164,7 +164,7 @@ gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true});
   </div>
     
   
-  <div class="quarto-title-meta column-page-right">
+  <div class="quarto-title-meta column-page">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -186,35 +186,10 @@ gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true});
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#why-im-writing-this" id="toc-why-im-writing-this" class="nav-link active" data-scroll-target="#why-im-writing-this">Why I’m Writing This</a></li>
-  <li><a href="#vllm-what-it-does" id="toc-vllm-what-it-does" class="nav-link" data-scroll-target="#vllm-what-it-does">vLLM: What It Does</a></li>
-  <li><a href="#the-kv-cache-math-i-keep-forgetting" id="toc-the-kv-cache-math-i-keep-forgetting" class="nav-link" data-scroll-target="#the-kv-cache-math-i-keep-forgetting">The KV Cache Math I Keep Forgetting</a></li>
-  <li><a href="#lmcache-why-i-actually-use-it" id="toc-lmcache-why-i-actually-use-it" class="nav-link" data-scroll-target="#lmcache-why-i-actually-use-it">LMCache: Why I Actually Use It</a></li>
-  <li><a href="#how-i-actually-profile-this" id="toc-how-i-actually-profile-this" class="nav-link" data-scroll-target="#how-i-actually-profile-this">How I Actually Profile This</a>
-  <ul class="collapse">
-  <li><a href="#quick-check-nvidia-smi" id="toc-quick-check-nvidia-smi" class="nav-link" data-scroll-target="#quick-check-nvidia-smi">Quick Check: nvidia-smi</a></li>
-  <li><a href="#my-standard-profiling-script" id="toc-my-standard-profiling-script" class="nav-link" data-scroll-target="#my-standard-profiling-script">My Standard Profiling Script</a></li>
-  <li><a href="#using-vllms-built-in-stats" id="toc-using-vllms-built-in-stats" class="nav-link" data-scroll-target="#using-vllms-built-in-stats">Using vLLM’s Built-in Stats</a></li>
-  </ul></li>
-  <li><a href="#my-deployment-notes-for-a100-80gb" id="toc-my-deployment-notes-for-a100-80gb" class="nav-link" data-scroll-target="#my-deployment-notes-for-a100-80gb">My Deployment Notes for A100 80GB</a></li>
-  <li><a href="#performance-numbers-ive-seen" id="toc-performance-numbers-ive-seen" class="nav-link" data-scroll-target="#performance-numbers-ive-seen">Performance Numbers I’ve Seen</a></li>
-  <li><a href="#things-i-learned-the-hard-way" id="toc-things-i-learned-the-hard-way" class="nav-link" data-scroll-target="#things-i-learned-the-hard-way">Things I Learned the Hard Way</a></li>
-  <li><a href="#quick-reference-model-sizes-fp16" id="toc-quick-reference-model-sizes-fp16" class="nav-link" data-scroll-target="#quick-reference-model-sizes-fp16">Quick Reference: Model Sizes (FP16)</a></li>
-  <li><a href="#when-i-come-back-to-this" id="toc-when-i-come-back-to-this" class="nav-link" data-scroll-target="#when-i-come-back-to-this">When I Come Back to This</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 
 
 
@@ -350,7 +325,7 @@ gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true});
 <ul>
 <li>Memory usage varies with load</li>
 <li>What works in testing might not scale</li>
-<li>I keep nvidia-smi running in a tmux window</li>
+<li>I keep nvidia-smi/nvtop running in a tmux window</li>
 </ul></li>
 <li><strong>GQA is a game changer</strong>
 <ul>

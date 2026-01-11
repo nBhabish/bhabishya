@@ -32,6 +32,7 @@ format:
       - morph
       - styles.css    # our overrides
     fontsize: 0.8rem
+    toc: false
     grid:
       sidebar-width: 300px
       body-width: 900px
