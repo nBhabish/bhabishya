@@ -157,7 +157,7 @@ body::before {
 ## What I Write About {.hero-title}
 
 ::: {.hero-subtitle}
-Data engineer exploring statistical inference, interactive visualizations, and LLM optimization. My posts cover practical applications from bootstrap resampling to deploying models on GPUs.
+Data engineer exploring statistical inference, interactive visualizations, and LLM optimization. My posts cover practical applications from bootstrap resampling to deploying LLMs on GPUs.
 :::
 
 ::: {.skills-grid}
