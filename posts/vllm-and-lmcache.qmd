@@ -211,10 +211,6 @@ Could batch 4-5 requests max - Lots of wasted memory
 **After vLLM with Llama 3.1 8B:** - \~40 requests/second - Batch 35-40
 requests - Much better memory utilization (GQA helps a lot)
 
-**After adding LMCache (for RAG app):** - First request: same latency -
-Subsequent requests: \~45% faster - Way better throughput because I'm
-skipping 500 tokens of repeated context
-
 ## Things I Learned the Hard Way
 
 1.  **Context length matters more than batch size for memory**
