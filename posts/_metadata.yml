@@ -9,9 +9,7 @@ freeze: true
 title-block-banner: true
 
 # Default for table of contents
-toc: true
-toc-title: Table of contents
-toc-location: left
+toc: false
 
 # Default knitr options
 execute:
